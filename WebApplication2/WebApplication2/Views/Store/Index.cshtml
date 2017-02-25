@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebApplication2.Models.Category>
+@{
+    ViewBag.Title = "ABComestics";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4 col-lg-4 col-md-4 productbox" style="padding: 1em">
+                <div class="thumbnail">
+                    <img src="../../Content/images/cate1.jpg" alt="" class="img-responsive">
+                    <div class="caption">
+                        <h3>
+                            @Html.ActionLink(item.Name, "Browse", new { categoryId = item.Id })
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<style>
+    html > body .caption > h4 > strong {
+        float: left;
+        font-size: 14px;
+        color: #c10017;
+        margin: 0 9px 5px;
+    }
+     .producttitle  {
+        font-weight: bold;
+        padding: 5px 0 5px 0;
+          
+    }
+     .thumbnail {
+         text-align: center
+     }
+     a {
+         color: #141414;
+     }
+
+    * html .caption > h3 {
+        display: block;
+        line-height: 1.3em;
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0 10px 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-transform: uppercase;
+    }
+    .productbox {
+        background-color: #ffffff;
+        padding: 10px;
+        margin-bottom: 10px;
+        -webkit-box-shadow: 0 4px 6px -3px #999;
+        -moz-box-shadow: 0 4px 6px -3px #999;
+        box-shadow: 0 4px 6px -3px #999;
+    }
+</style>

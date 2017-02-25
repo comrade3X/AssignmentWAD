@@ -1,0 +1,75 @@
+﻿@model WebApplication2.Models.ProductViewModel
+
+@{
+    ViewBag.Title = Model.CategoryName;
+}
+
+<div class="container">
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Store")</li>
+        <li>@Html.ActionLink("Woman", "Index", "Store")</li>
+        <li class="active"><span class="breadcrumb-item active">@Model.CategoryName</span></li>
+    </ol>
+    <div class="row">
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-sm-3 col-lg-3 col-md-3 productbox" @*style="padding: 1em"*@>
+                <div class="thumbnail">
+                    <img src="../../Content/images/cate1.jpg" alt="" class="img-responsive">
+                    <div class="caption">
+                        <h4 class="pull-right"><strong>$ @item.Price</strong></h4>
+                        <h3>
+                            @Html.ActionLink(item.Name, "Details", new {id = item.Id})
+                        </h3>
+                        @*<label>
+                                @item.Description.Substring(10)
+                            </label>*@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- pager -->
+    @if (Model.Pager.EndPage > 1)
+    {
+        <ul class="pagination">
+            @if (Model.Pager.CurrentPage > 1)
+            {
+                <li>
+                    <a href="~/Store/Browse?categoryId=@Model.CategoryId&page=1">First</a>
+                </li>
+                <li>
+                    <a href="~/Store/Browse?categoryId=@Model.CategoryId&page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                </li>
+            }
+
+            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                    <a href="~/Store/Browse?categoryId=@Model.CategoryId&page=@page">@page</a>
+                </li>
+            }
+
+            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <li>
+                    <a href="~/Store/Browse?categoryId=@Model.CategoryId&page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                </li>
+                <li>
+                    <a href="~/Store/Browse?categoryId=@Model.CategoryId&page=@(Model.Pager.TotalPages)">Last</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+<style>
+    .productbox {
+        background-color: #ffffff;
+        padding: 10px;
+        margin-bottom: 10px;
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 6px -6px #999;
+    }
+
+</style>

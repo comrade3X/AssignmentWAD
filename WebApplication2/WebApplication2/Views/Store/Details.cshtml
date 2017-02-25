@@ -1,0 +1,175 @@
+﻿@model WebApplication2.Models.ProductViewModel
+@{
+    ViewBag.Title = "Product";
+}
+<div class="container">
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Store")</li>
+        <li>@Html.ActionLink("Woman", "Index", "Store")</li>
+        <li class="active"><span class="breadcrumb-item active">@Model.CategoryName</span></li>
+    </ol>
+
+    <div class="container-fliud">
+        <div class="wrapper row">
+            <div class="preview col-md-6">
+                <div class="preview-pic tab-content">
+                    @for (int i = 0; i < Model.ListImages.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <div class="tab-pane active" id="pic-@(i)">
+                                <img src="../../Content/images/@Model.ListImages[i].Name" class="img-responsive" />
+                            </div>
+                            continue;
+                        }
+                        <div class="tab-pane" id="pic-@(i)">
+                            <img src="../../Content/images/@Model.ListImages[i].Name" class="img-responsive" />
+                        </div>
+                    }
+                    <ul class="preview-thumbnail nav nav-tabs">
+                        @for (int i = 0; i < Model.ListImages.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <li class="active">
+                                    <a data-target="#pic-@i" data-toggle="tab"><img class="img-responsive" src="../../Content/images/@Model.ListImages[i].Name" /></a>
+                                </li>
+                                continue;
+                            }
+                            <li class="">
+                                <a data-target="#pic-@i" data-toggle="tab"><img class="img-responsive" src="../../Content/images/@Model.ListImages[i].Name" /></a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+            <div class="details col-md-6">
+                <h3 class="product-title">@Model.Prodcut.Name</h3>
+                <div class="rating">
+                    <div class="stars">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <span class="review-no">41 reviews</span>
+                </div>
+                <p class="product-description">
+                    <span><strong>Made:</strong></span> <span>@Model.Prodcut.Made</span>
+                </p>
+                <p class="product-description">
+                    <span><strong>Brand:</strong></span> <span>@Model.Prodcut.Brand1.Name</span>
+                </p>
+                <p class="product-description">
+                    @Model.Prodcut.Description
+                </p>
+                <h4 class="price"><strong>$@Model.Prodcut.Price</strong></h4>
+                <p class="vote">
+                    Call <strong>0901323095</strong> for a free consultation
+                </p>
+                <h5 class="colors">
+                    Status: <strong>Available</strong>
+                </h5>
+                <div>
+                    @*<button class="add-to-cart btn btn-default" type="button" onclick="@Url.Action("")">add to cart</button>*@
+                    <p class="button">
+                        @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.Prodcut.Id }, "")
+                    </p>
+
+                    <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="content_bottom">
+            <div class="heading">
+                <h3>Related Products</h3>
+            </div>
+            <div class="pull-right">
+                <p>
+                    <a href="#">See all Products</a>
+                </p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        @foreach (var item in Model.RelatedProducts)
+        {
+            <div class="col-md-2 column productbox">
+                <img src="../../Content/images/default_product.jpg" class="img-responsive">
+                <div class="producttitle">@item.Name</div>
+                <div class="productprice">
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-danger btn-sm" role="button">BUY</a>
+                    </div>
+                    <div class="pricetext">$ @item.Price</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<style>
+    .productbox {
+        background-color: #ffffff;
+        padding: 10px;
+        margin-bottom: 10px;
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 6px -6px #999;
+    }
+
+    .producttitle {
+        font-weight: bold;
+        padding: 5px 0 5px 0;
+    }
+
+    .productprice {
+        border-top: 1px solid #dadada;
+        padding-top: 5px;
+    }
+
+    .pricetext {
+        font-weight: bold;
+        font-size: 1.4em;
+    }
+
+    .tableparameter {
+        display: block;
+        overflow: visible;
+    }
+
+    .parameter {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        background: #fff;
+        padding-top: 10px;
+    }
+
+        .parameter li {
+            display: table;
+            background: #fff;
+            width: 100%;
+            border-top: 1px solid #eee;
+            padding: 5px 0;
+        }
+
+            .parameter li span {
+                display: table-cell;
+                width: 40%;
+                vertical-align: top;
+                padding: 5px 0;
+                font-size: 14px;
+                color: #666;
+            }
+
+    h4.price > strong {
+        display: inline-block;
+        overflow: hidden;
+        font-size: 24px;
+        color: #d0021b;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+</style>
