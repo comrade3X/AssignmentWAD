@@ -1,0 +1,48 @@
+﻿@model WebApplication2.Models.Membership
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+
+}
+<link rel="stylesheet" href="../../Content/login.css"/>
+<link rel="stylesheet" href="../../Content/bootstrap.css" />
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    <div class="container">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                @Html.TextBoxFor(a => a.Username, new { @class = "form-control", @placeholder = "Username", required = "required" })
+                @Html.ValidationMessageFor(a => a.Username)
+                @Html.PasswordFor(a => a.Password, new { @class = "form-control", @placeholder = "Password", required = "required" })
+                @Html.ValidationMessageFor(a => a.Password)
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+            </form><!-- /form -->
+            <a href="#" class="forgot-password">
+                Forgot the password?
+            </a>
+        </div><!-- /card-container -->
+    </div>
+}
+@section scripts{
+    <script type="text/javascript">
+
+    </script>
+}

@@ -61,16 +61,11 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Woman", "Index", "Store")</li>
-                <li>@Html.ActionLink("Men", "About", "Home")</li>
+                <li>@Html.ActionLink("Management", "Index", "Manager")</li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    @{Html.RenderAction("CartSummary", "ShoppingCart");}
-                </li>
                 @if (Session["UserName"] != null)
                 {
-
                     <li>
                         @Html.ActionLink(Session["UserName"].ToString(), "Userdashboard", "Account")
                     </li>
@@ -83,14 +78,6 @@
     </div>
 </div>
     <div class="container body-content">
-        <div class="page-header">
-            <div class="mside">
-                <div class="hgroup">
-                    <h1>Beauty</h1>
-                    <h2>The hottest nail colours, make-up and haircare – a beauty junkie's dream</h2>
-                </div>
-            </div>
-        </div>
         @RenderBody()
         <hr />
         <footer>
