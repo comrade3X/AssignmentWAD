@@ -105,6 +105,6 @@ C:\Users\Tien Dung\Documents\Visual Studio 2015\Projects\AssignmentWAD.git\trunk
 C:\Users\Tien Dung\Documents\Visual Studio 2015\Projects\AssignmentWAD.git\trunk\WebApplication2\WebApplication2\bin\System.Web.WebPages.Razor.xml
 C:\Users\Tien Dung\Documents\Visual Studio 2015\Projects\AssignmentWAD.git\trunk\WebApplication2\WebApplication2\bin\Antlr3.Runtime.pdb
 C:\Users\Tien Dung\Documents\Visual Studio 2015\Projects\AssignmentWAD.git\trunk\WebApplication2\WebApplication2\bin\Newtonsoft.Json.xml
-C:\Users\Tien Dung\Documents\Visual Studio 2015\Projects\AssignmentWAD.git\trunk\WebApplication2\WebApplication2\obj\Debug\ABComestic.csprojResolveAssemblyReference.cache
 C:\Users\Tien Dung\Documents\Visual Studio 2015\Projects\AssignmentWAD.git\trunk\WebApplication2\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\Tien Dung\Documents\Visual Studio 2015\Projects\AssignmentWAD.git\trunk\WebApplication2\WebApplication2\obj\Debug\WebApplication2.pdb
+C:\Users\Tien Dung\Documents\Visual Studio 2015\Projects\AssignmentWAD.git\trunk\WebApplication2\WebApplication2\obj\Debug\ABComestic.csprojResolveAssemblyReference.cache

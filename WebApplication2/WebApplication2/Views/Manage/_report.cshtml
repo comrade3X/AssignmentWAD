@@ -1,0 +1,41 @@
+﻿@model WebApplication2.Models.ManagementViewModel
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Store Name</th>
+        <th>Address</th>
+        <th>Date</th>
+        <th>Total</th>
+    </tr>
+    @if (Model.ReportsViewModel == null)
+    {
+        <tr>
+            <td colspan="4">
+                No results found
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model.ReportsViewModel)
+        {
+            <tr>
+                <td>
+                    @item.StoreName
+                </td>
+                <td>
+                    @item.StoreAddress
+                </td>
+                <td>
+                    @item.Date.ToString("dd MMM yyyy")
+                </td>
+                <td>
+                    $ @item.Total
+                </td>
+            </tr>
+        }
+    }
+</table>
+<div style="float: left">
+    Total: <b>$ @Model.Total</b>
+</div>

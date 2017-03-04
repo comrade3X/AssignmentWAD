@@ -1,0 +1,133 @@
+﻿@using WebApplication2.Models
+@model WebApplication2.Models.ManagementViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "../Shared/_LayoutManager.cshtml";
+}
+<style>
+    legend, #results {
+        padding: 1em;
+    }
+</style>
+<legend> Search Critiria </legend>
+<div class="container">
+    <div class="row">
+        <div class="form-group row">
+            <div class="col-md-2">
+                Store:
+            </div>
+            <div class="col-md-8">
+                @Html.DropDownListFor(model => model.StoreName, Model.StoreSelectList)
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                Report:
+            </div>
+            <div class="col-md-8">
+                <label class="radio inline">
+                    <input type="radio" name="report-option" id="inlineCheckbox1" value="Daily" checked="checked"> Daily
+                </label>
+                <label class="radio inline">
+                    <input type="radio" name="report-option" id="inlineCheckbox2" value="Monthly"> Monthly
+                </label>
+                <a href="#" id="add-custom-date-range">Custom date range</a>
+            </div>
+        </div>
+        <div id="custom-date-range" style="display: none">
+            <div class="form-group row">
+                <div class="col-md-2">
+                    From:
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.DateFrom, new { @class = "form-control", id = "from-picker", role = "datepicker", @Value = Model.DateFrom.ToString("dd MMM yyyy") })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2">
+                    To:
+                </div>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.DateTo, new { @class = "form-control", id = "to-picker", role = "datepicker", @Value = Model.DateTo.ToString("dd MMM yyyy") })
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                &nbsp;
+            </div>
+            <div class="col-md-8">
+                <button type="button" id="search-btn" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+        <div id="results">
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $('#from-picker, #to-picker').datepicker({
+            dateFormat: 'd M y'
+        });
+
+        // Display custom date range
+        $('#add-custom-date-range').on('click', function () {
+            if ($('#custom-date-range').css('display') === 'none') {
+                $('#custom-date-range').show();
+                $(this).text('Hide custom date');
+            } else {
+                $('#custom-date-range').hide();
+                $(this).text('Custom date range');
+            }
+        });
+
+      
+
+        function Search() {
+            var dateFrom;
+            var dateTo;
+            var option;
+
+            // Search by default criteria
+            if ($('#custom-date-range').css('display') === 'none') {
+                option = $("input[name='report-option']:checked").val();
+                dateFrom = null;
+                dateTo = null;
+            } else {
+                option = null;
+                dateFrom = new Date($('#from-picker').val());
+                dateTo = new Date($('#to-picker').val());
+            }
+
+            var storeId = $('#StoreName').val();
+
+            var formData = {
+                storeId: storeId,
+                from: dateFrom,
+                to: dateTo,
+                option: option
+            }
+
+            $.ajax({
+                url: '@Url.Action("GetReport", "Manage")',
+                data: JSON.stringify(formData),
+                type: "POST",
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#results").html(data);
+                },
+                error: function (xhr) {
+                    alert(xhr);
+                }
+            });
+        }
+        // AJAX perform search
+        $('#search-btn').on('click', function () {
+            Search();
+        });
+
+    </script>
+}
+

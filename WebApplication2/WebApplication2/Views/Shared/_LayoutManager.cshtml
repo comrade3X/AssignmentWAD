@@ -47,6 +47,7 @@
             margin: 0 9px 5px;
         }
     </style>
+    <meta name="description" content="The description of my page" />
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -61,7 +62,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Management", "Index", "Manager")</li>
+                <li>@Html.ActionLink("Management", "Index", "Manage")</li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Session["UserName"] != null)
@@ -87,6 +88,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
     <link href="@Url.Content("../../Content/product-details.css")" rel="stylesheet" type="text/css" />
     @RenderSection("scripts", required: false)
 </body>
